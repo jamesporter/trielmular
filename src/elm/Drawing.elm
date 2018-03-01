@@ -1,11 +1,8 @@
-module Game exposing (..)
+module Drawing exposing (..)
 
 import Html exposing (Html)
 import Models exposing (..)
-import GameView exposing (..)
 import Updates exposing (..)
-import AnimationFrame
-import Keyboard
 
 
 main : Program Never Model Msg
@@ -26,10 +23,6 @@ init =
 
 -- SUBSCRIPTIONS
 
-
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.batch
-        [ AnimationFrame.diffs TimeUpdate
-        , Keyboard.downs KeyDown
-        ]
+    Sub.none
