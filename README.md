@@ -75,3 +75,10 @@ now
 ### Alternative deployments
 
 Whatever option selected must ensure that serving from route as js url is relative to `/` i.e. treat `dist` as root.
+
+
+# Notes
+
+## How grid generated
+
+![Maths](maths.jpg)
