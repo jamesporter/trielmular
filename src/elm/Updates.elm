@@ -11,7 +11,13 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Click x y ->
-            (model, Cmd.none)
+            let 
+                i = coordToId (x,y)
+                existing = get i model.triangles
+            in
+                case existing of
+                    Just e -> let next = nextColour e in ({model | triangles = set i next model.triangles }, Cmd.none)
+                    Nothing -> (model, Cmd.none)
 
 initialModel : Model
 initialModel =

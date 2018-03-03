@@ -2,38 +2,28 @@ module View exposing (..)
 
 import Updates exposing (..)
 import Models exposing (..)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
-import Html.Events
-import Svg exposing (svg, polygon, circle)
-import Svg.Attributes exposing (version, viewBox, points, fill, cx, cy, r)
+import Html exposing (Html, text, h1)
+import Html.Attributes exposing (style, class)
+import Svg exposing (svg, polygon)
+import Svg.Attributes exposing (version, viewBox, points, fill)
 import Svg.Events exposing (onClick)
-import Parameters exposing (height, width)
+import Parameters exposing (height, width, delta)
+import Array exposing (get)
+
 
 
 view : Model -> Html Msg
 view model =
     Html.div
-        [ style
-            [ ( "width", "100%" )
-            , ( "height", "100%" )
-            , ( "background", "#1f1f1f" )
-            , ( "color", "white" )
-            , ( "display", "flex" )
-            , ( "align-items", "center" )
-            , ( "justify-content", "center" )
-            , ( "font-family", "Futura" )
-            , ( "text-align", "center" )
-            ]
-        ]
-        [ viewDrawing model ]
+        []
+        [ viewDrawing model, h1 [ class "title"] [ text "Trielmular"] ]
 
 
 viewDrawing : Model -> Html Msg
-viewGame model =
+viewDrawing model =
     Html.div
-        [ style [ ( "max-width", "400px" ), ( "min-width", "280px" ), ( "flex", "1" ) ] ]
-        [ svg [ version "1.1", viewBox "0 0 400 400" ] viewGrid model]
+        [ class "drawing" ]
+        [ svg [ version "1.1", viewBox "0 0 22 20" ] (viewGrid model)]
 
 
 viewGrid : Model -> List (Html Msg)
@@ -44,13 +34,38 @@ viewGrid model =
 viewGridElement : Model -> Int -> Html Msg
 viewGridElement model idx =
     let
-      x = idx % width
-      y = idx // height
+      (x,y) = idToCoord idx
       triangle = get idx model.triangles
-    in          
-        rect [ Svg.Attributes.x  (toString (x * 400 // width))
-                        , Svg.Attributes.y (toString (y * 400 // height))
-                        , Svg.Attributes.width (toString (400 // height))
-                        , Svg.Attributes.height (toString (400 // height))
-                        , fill "#444"
-                        ] []  
+    in      
+        polygon [ points (polyPath (x,y)), fill (fillColour triangle), onClick (Click x y)] []
+
+    
+
+polyPath : (Int, Int) -> String
+polyPath (a,b) =
+    let (x,y) = (toFloat a, toFloat b) in
+        if (a + b) % 2 == 0 then
+            coordsToString [(x + 1, y), (x + delta, y + 1 - delta), (x + 2 - delta, y + 1 - delta)]
+        else
+            coordsToString [(x + delta, y), (x - delta + 2, y ), (x + 1 , y + 1 - delta)]
+
+
+coordsToString : List (number, number) -> String
+coordsToString coords =
+    coords 
+        |> List.map (\(x,y) -> (toString x) ++ "," ++ (toString y))
+        |> String.join " " 
+
+
+fillColour : Maybe Triangle -> String
+fillColour triangle =
+    case triangle of
+        Just t ->
+            case t of 
+                Blank -> "#5C6376"
+                Yellow -> "#E5AF3C"
+                Green -> "#94CE54"
+                Blue -> "#77B3C9"
+        Nothing -> 
+            "#3B404C"
+

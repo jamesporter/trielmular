@@ -3,6 +3,7 @@ module Drawing exposing (..)
 import Html exposing (Html)
 import Models exposing (..)
 import Updates exposing (..)
+import View exposing (view)
 
 
 main : Program Never Model Msg
