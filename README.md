@@ -1,6 +1,8 @@
 # Trielmular
 
-A basic drawing App with Elm
+A basic drawing App with Elm, a starter for your own graphic editing projects 
+
+[Try/Demo](http://trielmular.amimetic.co.uk)
 
 ![Example of Trielmular graphic](trielmular.png)
 
@@ -10,18 +12,27 @@ Create graphics with Elm
 
 A good starting point for something more interesting (e.g. add better controls, reset, scale triangles, add ordering, more colours, new drawing tools like fill or lines, different geometries, themes and more?)
 
+### Install
+
+```
+yarn
+```
+
 ### Serve locally:
+
 ```
-npm start
+yarn start
 ```
+
 * Open [http://localhost:8080/](http://localhost:8080/)
 * The main Elm file is `src/elm/Game.elm`
 * Will auto reload on changes
 
 
 ### Build & bundle for prod:
+
 ```
-npm run build
+yarn run build
 ```
 
 * Files are saved into the `/dist` folder; will require web server due to paths (can't just open in browser)
@@ -31,6 +42,7 @@ npm run build
 Having configured/created aws-config.json
 
 ```
+yarn run build
 gulp deploy
 ```
 
