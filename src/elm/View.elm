@@ -23,7 +23,7 @@ viewDrawing : Model -> Html Msg
 viewDrawing model =
     Html.div
         [ class "drawing" ]
-        [ svg [ version "1.1", viewBox "0 0 22 20" ] (viewGrid model)]
+        [ svg [ version "1.1", viewBox "0 0 21 20" ] (viewGrid model)]
 
 
 viewGrid : Model -> List (Html Msg)
