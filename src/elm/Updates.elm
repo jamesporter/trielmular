@@ -40,7 +40,7 @@ setCell i colour model =
 
 drawVertical: Int -> Model -> (Model, Cmd msg)
 drawVertical x model =
-    ({ model | triangles = Array.indexedMap (\i t -> if i % width == x then Yellow else t) model.triangles}, Cmd.none)
+    ({ model | triangles = Array.indexedMap (\i t -> if i % width == x then (nextColour t) else t) model.triangles}, Cmd.none)
 
 initialModel : Model
 initialModel =
