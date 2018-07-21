@@ -22,6 +22,9 @@ update msg model =
                     SetTriangle colour ->
                         setCell i colour model
 
+                    Vertical ->
+                        drawVertical x model
+
         SelectControl control ->
             ( { model | selectedControl = control }, Cmd.none )
 
@@ -34,6 +37,10 @@ toggleCell i existing model =
 setCell: Int -> Triangle -> Model -> ( Model, Cmd msg )
 setCell i colour model =
     ({ model | triangles = set i colour model.triangles}, Cmd.none)
+
+drawVertical: Int -> Model -> (Model, Cmd msg)
+drawVertical x model =
+    ({ model | triangles = Array.indexedMap (\i t -> if i % width == x then Yellow else t) model.triangles}, Cmd.none)
 
 initialModel : Model
 initialModel =

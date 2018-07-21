@@ -4,7 +4,7 @@ import Parameters exposing (..)
 
 type Triangle = Blank | Green | Blue | Yellow
 
-type Control = Toggle | SetTriangle Triangle
+type Control = Toggle | SetTriangle Triangle | Vertical
 
 nextColour : Triangle -> Triangle
 nextColour tri =
