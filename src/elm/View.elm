@@ -107,5 +107,8 @@ fillColour triangle =
                 Blue ->
                     "#77B3C9"
 
+                Orange ->
+                    "#ee6600"
+
         Nothing ->
             "#3B404C"

@@ -2,7 +2,7 @@ module Models exposing (..)
 import Array exposing (Array)
 import Parameters exposing (..)
 
-type Triangle = Blank | Green | Blue | Yellow
+type Triangle = Blank | Green | Blue | Yellow | Orange
 
 type Control = Toggle | SetTriangle Triangle
 
@@ -12,7 +12,8 @@ nextColour tri =
         Blank -> Green
         Green -> Blue
         Blue -> Yellow
-        Yellow -> Blank
+        Yellow -> Orange
+        Orange -> Blank
 
 type alias Model =
     { triangles : Array Triangle
