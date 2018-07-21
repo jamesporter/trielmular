@@ -4,6 +4,8 @@ import Parameters exposing (..)
 
 type Triangle = Blank | Green | Blue | Yellow
 
+type Control = Toggle | SetTriangle Triangle
+
 nextColour : Triangle -> Triangle
 nextColour tri =
     case tri of
@@ -14,6 +16,7 @@ nextColour tri =
 
 type alias Model =
     { triangles : Array Triangle
+    , selectedControl: Control
     }
 
 idToCoord: Int -> (Int, Int)
