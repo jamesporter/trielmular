@@ -64,6 +64,7 @@ availableControls =
     , ( "Green", SetTriangle Green )
     , ( "Yellow", SetTriangle Yellow )
     , ( "Blue", SetTriangle Blue )
+    , ( "Clear", SetTriangle Blank )
     ]
 
 

@@ -38,5 +38,5 @@ setCell i colour model =
 initialModel : Model
 initialModel =
     { triangles = repeat (width * height) Blank
-    , selectedControl = SetTriangle Green
+    , selectedControl = Toggle
     }
