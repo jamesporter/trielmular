@@ -62,8 +62,9 @@ availableControls : List ( String, Control )
 availableControls =
     [ ( "Toggle", Toggle )
     , ( "Green", SetTriangle Green )
-    , ( "Yellow", SetTriangle Yellow )
     , ( "Blue", SetTriangle Blue )
+    , ( "Yellow", SetTriangle Yellow )
+    , ( "Orange", SetTriangle Orange )
     , ( "Clear", SetTriangle Blank )
     ]
 
