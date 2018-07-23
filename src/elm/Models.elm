@@ -1,28 +1,49 @@
 module Models exposing (..)
+
 import Array exposing (Array)
 import Parameters exposing (..)
 
-type Triangle = Blank | Green | Blue | Yellow
 
-type Control = Toggle | SetTriangle Triangle | Vertical
+type Triangle
+    = Blank
+    | Green
+    | Blue
+    | Yellow
+
+
+type Control
+    = Toggle
+    | SetTriangle Triangle
+    | Vertical
+
 
 nextColour : Triangle -> Triangle
 nextColour tri =
     case tri of
-        Blank -> Green
-        Green -> Blue
-        Blue -> Yellow
-        Yellow -> Blank
+        Blank ->
+            Green
+
+        Green ->
+            Blue
+
+        Blue ->
+            Yellow
+
+        Yellow ->
+            Blank
+
 
 type alias Model =
     { triangles : Array Triangle
-    , selectedControl: Control
+    , selectedControl : Control
     }
 
-idToCoord: Int -> (Int, Int)
-idToCoord i =
-    (i % width, i // height)
 
-coordToId: (Int, Int) -> Int
-coordToId (x,y) =
+idToCoord : Int -> ( Int, Int )
+idToCoord i =
+    ( i % width, i // height )
+
+
+coordToId : ( Int, Int ) -> Int
+coordToId ( x, y ) =
     x + y * width
