@@ -1,15 +1,15 @@
 module View exposing (..)
 
-import Updates exposing (..)
-import Models exposing (..)
-import Html exposing (Html, text, h1, a)
-import Html.Attributes exposing (style, class, classList)
-import Html.Events
-import Svg exposing (svg, polygon)
-import Svg.Attributes exposing (version, viewBox, points, fill)
-import Svg.Events exposing (onClick)
-import Parameters exposing (height, width, delta)
 import Array exposing (get)
+import Html exposing (Html, a, h1, text)
+import Html.Attributes exposing (class, classList, style)
+import Html.Events
+import Models exposing (..)
+import Parameters exposing (delta, height, width)
+import Svg exposing (polygon, svg)
+import Svg.Attributes exposing (fill, points, version, viewBox)
+import Svg.Events exposing (onClick)
+import Updates exposing (..)
 
 
 view : Model -> Html Msg
@@ -43,7 +43,7 @@ viewGridElement model idx =
         triangle =
             get idx model.triangles
     in
-        polygon [ points (polyPath ( x, y )), fill (fillColour triangle), onClick (Click x y) ] []
+    polygon [ points (polyPath ( x, y )), fill (fillColour triangle), onClick (Click x y) ] []
 
 
 polyPath : ( Int, Int ) -> String
@@ -52,10 +52,10 @@ polyPath ( a, b ) =
         ( x, y ) =
             ( toFloat a, toFloat b )
     in
-        if (a + b) % 2 == 0 then
-            coordsToString [ ( x + 1, y ), ( x + delta, y + 1 - delta ), ( x + 2 - delta, y + 1 - delta ) ]
-        else
-            coordsToString [ ( x + delta, y ), ( x - delta + 2, y ), ( x + 1, y + 1 - delta ) ]
+    if (a + b) % 2 == 0 then
+        coordsToString [ ( x + 1, y ), ( x + delta, y + 1 - delta ), ( x + 2 - delta, y + 1 - delta ) ]
+    else
+        coordsToString [ ( x + delta, y ), ( x - delta + 2, y ), ( x + 1, y + 1 - delta ) ]
 
 
 availableControls : List ( String, Control )
@@ -74,20 +74,19 @@ viewControls model =
     Html.div [ class "controls" ] (List.map (control model.selectedControl) availableControls)
 
 
-control: Control -> ( String, Control) -> Html Msg
-control current (name, ctrl) =
-    let 
-        selected = ctrl == current 
-    in 
-        a [ Html.Events.onClick (SelectControl ctrl), classList [("control", True), ("selected", selected)]] [ text name ]
-
-
+control : Control -> ( String, Control ) -> Html Msg
+control current ( name, ctrl ) =
+    let
+        selected =
+            ctrl == current
+    in
+    a [ Html.Events.onClick (SelectControl ctrl), classList [ ( "control", True ), ( "selected", selected ) ] ] [ text name ]
 
 
 coordsToString : List ( number, number ) -> String
 coordsToString coords =
     coords
-        |> List.map (\( x, y ) -> (toString x) ++ "," ++ (toString y))
+        |> List.map (\( x, y ) -> toString x ++ "," ++ toString y)
         |> String.join " "
 
 
