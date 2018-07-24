@@ -43,7 +43,7 @@ viewGridElement model idx =
         triangle =
             get idx model.triangles
     in
-    polygon [ points (polyPath ( x, y )), fill (fillColour triangle), onClick (Click x y) ] []
+        polygon [ points (polyPath ( x, y )), fill (fillColour triangle), onClick (Click x y) ] []
 
 
 polyPath : ( Int, Int ) -> String
@@ -52,10 +52,10 @@ polyPath ( a, b ) =
         ( x, y ) =
             ( toFloat a, toFloat b )
     in
-    if (a + b) % 2 == 0 then
-        coordsToString [ ( x + 1, y ), ( x + delta, y + 1 - delta ), ( x + 2 - delta, y + 1 - delta ) ]
-    else
-        coordsToString [ ( x + delta, y ), ( x - delta + 2, y ), ( x + 1, y + 1 - delta ) ]
+        if (a + b) % 2 == 0 then
+            coordsToString [ ( x + 1, y ), ( x + delta, y + 1 - delta ), ( x + 2 - delta, y + 1 - delta ) ]
+        else
+            coordsToString [ ( x + delta, y ), ( x - delta + 2, y ), ( x + 1, y + 1 - delta ) ]
 
 
 availableControls : List ( String, Control )
@@ -79,7 +79,7 @@ control current ( name, ctrl ) =
         selected =
             ctrl == current
     in
-    a [ Html.Events.onClick (SelectControl ctrl), classList [ ( "control", True ), ( "selected", selected ) ] ] [ text name ]
+        a [ Html.Events.onClick (SelectControl ctrl), classList [ ( "control", True ), ( "selected", selected ) ] ] [ text name ]
 
 
 coordsToString : List ( number, number ) -> String
