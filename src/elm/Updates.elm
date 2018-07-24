@@ -21,12 +21,12 @@ update msg model =
                 existing =
                     get i model.triangles
             in
-            case model.selectedControl of
-                Toggle ->
-                    toggleCell i existing model
+                case model.selectedControl of
+                    Toggle ->
+                        toggleCell i existing model
 
-                SetTriangle colour ->
-                    setCell i colour model
+                    SetTriangle colour ->
+                        setCell i colour model
 
         SelectControl control ->
             ( { model | selectedControl = control }, Cmd.none )
@@ -40,7 +40,7 @@ toggleCell i existing model =
                 next =
                     nextColour e
             in
-            ( { model | triangles = set i next model.triangles }, Cmd.none )
+                ( { model | triangles = set i next model.triangles }, Cmd.none )
 
         Nothing ->
             ( model, Cmd.none )
